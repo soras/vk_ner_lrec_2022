@@ -1,0 +1,29 @@
+/---/
+
+2021-12-30T19:46:44 - INFO - The grid search completed.
+2021-12-30T19:46:44 - INFO - The best model was 'model_wikibert-et_1_bs8_lr5e-05_ep3' with dev set F1: 0.907861369399831
+2021-12-30T19:46:44 - INFO - Retraining the best model with 10 epochs.
+2021-12-30T19:46:44 - INFO -  Starting a new grid search iteration (10) ...
+2021-12-30T19:46:44 - INFO -  Model params:  batch_size=8, learning_rate=5e-05, max_epochs=10
+
+/---/
+
+2021-12-30T20:11:55 - INFO - collecting and preprocessing 'data/dev' ...
+2021-12-30T20:11:58 - INFO - evaluating on 'data/dev' ...
+2021-12-30T20:18:36 - INFO -  125 documents processed in 0:06:37.206664.
+2021-12-30T20:18:36 - INFO - 
+              TOTAL       PER   LOC_ORG       LOC       ORG      MISC 
+     prec    0.9155    0.9534    0.6947    0.5714    0.8750    0.7500 
+      rec    0.9198    0.9676    0.6911    0.4800    0.8077    0.7500 
+       f1    0.9177    0.9605    0.6929    0.5217    0.8400    0.7500 
+
+2021-12-30T20:18:36 - INFO - collecting and preprocessing 'data/test' ...
+2021-12-30T20:18:46 - INFO - evaluating on 'data/test' ...
+2021-12-30T20:28:58 - INFO -  250 documents processed in 0:10:12.061730.
+2021-12-30T20:28:58 - INFO - 
+              TOTAL       PER   LOC_ORG       LOC       ORG      MISC 
+     prec    0.9129    0.9442    0.7621    0.5918    0.8933    0.7692 
+      rec    0.9198    0.9547    0.7506    0.6000    0.9178    0.6667 
+       f1    0.9163    0.9494    0.7563    0.5959    0.9054    0.7143 
+
+2021-12-30T20:28:59 - INFO - Total time elapsed: 2:34:37.939628.

@@ -1,0 +1,21 @@
+2021-12-29T14:27:45 - INFO - (*) Evaluating NerTagger
+2021-12-29T14:27:45 - INFO - collecting and preprocessing 'data\\dev' ...
+2021-12-29T14:28:07 - INFO - evaluating on 'data\\dev' ...
+2021-12-29T14:29:52 - INFO -  125 documents processed in 0:01:44.527976.
+2021-12-29T14:29:52 - INFO - 
+              TOTAL       PER   LOC_ORG       LOC       ORG      MISC 
+     prec    0.9250    0.9510    0.6986    0.8148    0.8182    0.6364 
+      rec    0.8689    0.9278    0.5340    0.4400    0.6923    0.6562 
+       f1    0.8961    0.9392    0.6053    0.5714    0.7500    0.6462 
+
+2021-12-29T14:29:52 - INFO - collecting and preprocessing 'data\\test' ...
+2021-12-29T14:30:26 - INFO - evaluating on 'data\\test' ...
+2021-12-29T14:33:34 - INFO -  250 documents processed in 0:03:08.823335.
+2021-12-29T14:33:34 - INFO - 
+              TOTAL       PER   LOC_ORG       LOC       ORG      MISC 
+     prec    0.9124    0.9374    0.7697    0.6577    0.8438    0.7273 
+      rec    0.8547    0.8991    0.6398    0.5034    0.7397    0.5333 
+       f1    0.8826    0.9179    0.6988    0.5703    0.7883    0.6154 
+
+2021-12-29T14:33:34 - INFO - (*) Whole evaluation took 0:05:49.067363
+

@@ -1,0 +1,29 @@
+/---/
+
+2021-12-30T21:35:51 - INFO - The grid search completed.
+2021-12-30T21:35:51 - INFO - The best model was 'model_est-roberta_2_bs16_lr5e-05_ep3' with dev set F1: 0.9229795315467398
+2021-12-30T21:35:51 - INFO - Retraining the best model with 10 epochs.
+2021-12-30T21:35:51 - INFO -  Starting a new grid search iteration (10) ...
+2021-12-30T21:35:51 - INFO -  Model params:  batch_size=16, learning_rate=5e-05, max_epochs=10
+
+/---/
+
+2021-12-30T22:44:50 - INFO - collecting and preprocessing 'data/dev' ...
+2021-12-30T22:44:56 - INFO - evaluating on 'data/dev' ...
+2021-12-30T22:51:23 - INFO -  125 documents processed in 0:06:27.527088.
+2021-12-30T22:51:23 - INFO - 
+              TOTAL       PER   LOC_ORG       LOC       ORG      MISC 
+     prec    0.9143    0.9491    0.7277    0.6735    0.6897    0.7429 
+      rec    0.9372    0.9751    0.7277    0.6600    0.7692    0.8125 
+       f1    0.9256    0.9619    0.7277    0.6667    0.7273    0.7761 
+
+2021-12-30T22:51:23 - INFO - collecting and preprocessing 'data/test' ...
+2021-12-30T22:51:34 - INFO - evaluating on 'data/test' ...
+2021-12-30T23:01:31 - INFO -  250 documents processed in 0:09:56.519905.
+2021-12-30T23:01:31 - INFO - 
+              TOTAL       PER   LOC_ORG       LOC       ORG      MISC 
+     prec    0.9297    0.9570    0.8030    0.6575    0.9231    0.7619 
+      rec    0.9424    0.9693    0.8212    0.6621    0.9863    0.7111 
+       f1    0.9360    0.9631    0.8120    0.6598    0.9536    0.7356 
+
+2021-12-30T23:01:32 - INFO - Total time elapsed: 5:27:25.339460.
