@@ -8,18 +8,37 @@
 #
 
 import re
-import os, os.path, json
+import os, os.path
 
 from typing import MutableMapping, List
 
 from estnltk.text import Text
 from estnltk.taggers import Tagger
-from estnltk.layer.layer import Layer
+from estnltk import Layer
 
 import torch
 import numpy as np
+from transformers import AutoConfig
 from transformers import AutoTokenizer
 from transformers import AutoModelForTokenClassification
+
+def _is_model_from_huggingface( model_path_or_name: str ):
+    '''
+    Checks if the given model_path_or_name is an existing model in huggingface.co.
+    Returns True if such model exists and False otherwise.
+    '''
+    from huggingface_hub import model_info
+    from requests.exceptions import HTTPError
+    try:
+        model_inf = model_info(model_path_or_name)
+        return True
+    except HTTPError as err:
+        status_code = err.response.status_code
+        if status_code == 404:
+            # URL not found: no such model exists in hf
+            return False
+        raise err
+
 
 class BertNERTagger(Tagger):
     """Applies BERT-based named entity recognition."""
@@ -33,8 +52,21 @@ class BertNERTagger(Tagger):
                   ignore_sentence_boundaries: bool = True,
                   ambiguous_label_separator:str = '|',
                   **kwargs ):
-        assert bert_ner_location is not None  and  os.path.exists(bert_ner_location)
-        assert bert_tokenizer_location is not None  and  os.path.exists(bert_tokenizer_location)
+        assert bert_tokenizer_location is not None
+        assert bert_ner_location is not None
+        # Check if we have a local model or a huggingface model
+        if not os.path.exists( bert_tokenizer_location ):
+            if not _is_model_from_huggingface( bert_tokenizer_location ):
+                raise ValueError( ('(!) Invalid bert_tokenizer_location={!r}. '+\
+                                   'It should be either a path to the local model '+\
+                                   'directory or repo_id of a model available '+\
+                                   'from huggingface.co').format( bert_tokenizer_location ) )
+        if not os.path.exists( bert_ner_location ):
+            if not _is_model_from_huggingface( bert_ner_location ):
+                raise ValueError( ('(!) Invalid bert_ner_location={!r}. '+\
+                                   'It should be either a path to the local model '+\
+                                   'directory or repo_id of a model available '+\
+                                   'from huggingface.co').format( bert_tokenizer_location ) )
         self.conf_param = ('bert_tokenizer', 'bert_ner', 'sentences_layer', 'token_level', 
                            'id2label', 'merge_consecutive_tags', 'ignore_sentence_boundaries',
                            'ambiguous_label_separator')
@@ -43,9 +75,12 @@ class BertNERTagger(Tagger):
         self.bert_ner = AutoModelForTokenClassification.from_pretrained( bert_ner_location,
             output_attentions = False,
             output_hidden_states = False )
+        # Fetch id2label mapping from configuration
+        config_dict = AutoConfig.from_pretrained(bert_ner_location).to_dict()
+        self.id2label, _ = config_dict["id2label"], config_dict["label2id"]
+        # Set input and output layers
         self.token_level = token_level
         self.sentences_layer = sentences_layer
-        self.id2label, _ = self._load_id_to_label_mappings( bert_ner_location )
         self.output_layer = output_layer
         self.input_layers = [sentences_layer]
         self.output_attributes = ['bert_tokens', 'nertag']
@@ -53,14 +88,6 @@ class BertNERTagger(Tagger):
         # Ignores sentence boundaries intersecting with ner phrases
         # ( because frequently sentence boundaries are wrong, and ner phrases are correct )
         self.ignore_sentence_boundaries = ignore_sentence_boundaries
-
-    def _load_id_to_label_mappings( self, model_name_or_path ):
-        '''Loads id2label and label2id mappings from the configuration file.'''
-        config_path = os.path.join(model_name_or_path, 'config.json')
-        assert os.path.exists(config_path), '(!) Missing configuration file {!r}'.format(config_path)
-        with open(config_path) as in_f:
-            conf_data = json.load( in_f )
-        return conf_data["id2label"], conf_data["label2id"]
     
     def _get_bert_ner_label_predictions( self, input_str ):
         '''Applies Bert on given input string and returns Bert's tokens, token indexes and predicted NER labels.'''
@@ -71,7 +98,7 @@ class BertNERTagger(Tagger):
             output = self.bert_ner( input_ids )
         tokens = self.bert_tokenizer.convert_ids_to_tokens( input_ids.to('cpu').numpy()[0] )
         label_indices = np.argmax(output[0].to('cpu').numpy(), axis=2)
-        converted_labels = [self.id2label[str(l)] if str(l) in self.id2label else f'---({l})' for l in label_indices[0]]
+        converted_labels = [self.id2label[l] if l in self.id2label else f'---({l})' for l in label_indices[0]]
         assert len(tokens) == len(token_indexes)
         assert len(converted_labels) == len(token_indexes)
         return tokens, token_indexes, converted_labels

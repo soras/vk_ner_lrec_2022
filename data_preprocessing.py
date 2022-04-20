@@ -76,8 +76,16 @@ token_splitter = TokenSplitter(patterns=[re.compile(r'(?P<end>[A-ZÕÄÖÜ]{1}\w
 
 # ========================================================
 
-from estnltk.taggers.text_segmentation.compound_token_tagger import ALL_1ST_LEVEL_PATTERNS
-from estnltk.taggers.text_segmentation.compound_token_tagger import CompoundTokenTagger
+try:
+    # EstNLTK 1.6.9(.1)
+    from estnltk.taggers.text_segmentation.compound_token_tagger import ALL_1ST_LEVEL_PATTERNS
+    from estnltk.taggers.text_segmentation.compound_token_tagger import CompoundTokenTagger
+except ImportError as err:
+    # EstNLTK 1.7.0
+    from estnltk.taggers.standard.text_segmentation.compound_token_tagger import ALL_1ST_LEVEL_PATTERNS
+    from estnltk.taggers.standard.text_segmentation.compound_token_tagger import CompoundTokenTagger
+except:
+    raise
 
 def make_adapted_cp_tagger(**kwargs):
     '''Creates an adapted CompoundTokenTagger that exludes roman numerals from names with initials.'''
