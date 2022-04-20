@@ -6,7 +6,7 @@
 #  Then the directory name of trainable model should be given as the 
 #  command line argument of the script, e.g.
 #
-#     python  train_and_eval_bert_model.py  EstBERT
+#     python  03_train_and_eval_bert_model.py  EstBERT
 #
 #  Normally, you should place model sub directories in the same 
 #  directory as this script. 

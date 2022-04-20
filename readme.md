@@ -39,7 +39,7 @@ For detailed package requirements, see the file [conda_environment.yml](conda_en
 		* [https://huggingface.co/tartuNLP/EstBERT](https://huggingface.co/tartuNLP/EstBERT)
 		* [https://huggingface.co/TurkuNLP/wikibert-base-et-cased](https://huggingface.co/TurkuNLP/wikibert-base-et-cased)
 		* [https://huggingface.co/EMBEDDIA/est-roberta](https://huggingface.co/EMBEDDIA/est-roberta) 
-	* The directory name of trainable model should be given as the command line argument of the script, e.g. `python  train_and_eval_bert_model.py EstBERT`.
+	* The directory name of trainable model should be given as the command line argument of the script, e.g. `python  03_train_and_eval_bert_model.py EstBERT`.
 
 ## Results
 
