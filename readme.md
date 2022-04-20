@@ -32,10 +32,10 @@ For detailed package requirements, see the file [conda_environment.yml](conda_en
 * `02b_eval_estnltk_ner_default_model_on_dev_test.py` -- Evaluates the previous model on `dev` and `test` sets.
 	* Note: initially, we wanted to use the best model from Kristjan Poska's experiments as the baseline. However, after   retraining and evaluating the model on the new data split (steps `01a` and `01b`), its performance turned out to be lower than previously measured, and lower than the performance of retrained EstNLTK's default NER model (steps `02a` and `02b`). So, we chose the retrained default NER model (steps `02a` and `02b`) as the new baseline.
 
-### Training BERT models
+### Fine-tuning BERT models
 
-* `03_train_and_eval_bert_model.py` -- Trains and evaluates BERT-based NER model. First, performs a grid search to find the best configuration of hyperparameters for training. Then trains the model with the best configuration for 10 epochs, keeps and saves the best model (based on F1 score on the 'dev' set), and finally evaluates the best model on the 'test' set.
-	* Assumes that the corresponding models  have already been downloaded and unpacked into local directories `'EstBERT'`, `'WikiBert-et'` and `'est-roberta'`. You can download the models from urls: 
+* `03_train_and_eval_bert_model.py` -- Fine-tunes and evaluates BERT-based NER model. First, performs a grid search to find the best configuration of hyperparameters for training. Then fine-tunes the model with the best configuration for 10 epochs, keeps and saves the best model (based on F1 score on the 'dev' set), and finally evaluates the best model on the 'test' set.
+	* Assumes that the corresponding models have already been downloaded and unpacked into local directories `'EstBERT'`, `'WikiBert-et'` and `'est-roberta'`. You can download the models from urls: 
 		* [https://huggingface.co/tartuNLP/EstBERT](https://huggingface.co/tartuNLP/EstBERT)
 		* [https://huggingface.co/TurkuNLP/wikibert-base-et-cased](https://huggingface.co/TurkuNLP/wikibert-base-et-cased)
 		* [https://huggingface.co/EMBEDDIA/est-roberta](https://huggingface.co/EMBEDDIA/est-roberta) 
@@ -45,13 +45,24 @@ For detailed package requirements, see the file [conda_environment.yml](conda_en
 
 ### Evaluation results
 
+Results on the 'test' set:
+
+| model       | precision | recall | F1-score |
+|---          |---        |---     |---       |
+| Baseline    | 91.57     | 88.18  | 89.84    |
+| EstBERT     | 89.74     | 91.15  | 90.44    |
+| WikiBERT-et | 91.29     | 91.98  | 91.63    |
+| Est-RoBERTa | 92.97     | 94.24  | 93.60    |
+
+
 * [logs](logs) -- excerpts of training and evaluation log files with the final results.
 * [results](results) -- detailed evaluation results in json format, using evaluation metrics from the [nervaluate package](https://github.com/MantisAI/nervaluate).
 
 ### Models
 
 * [retrain\_estnltk\_ner](retrain_estnltk_ner) -- retrained EstNLTK's NerTagger models from steps `01a` and `02a`.
-* `bert_models` -- **TODO**
+* `bert_models` -- fine-tuned BERT models from step `03`. Because BERT models are large, they are not distributed with this repository. However, the best model from our experiments is available from: [https://huggingface.co/tartuNLP/est-roberta-hist-ner](https://huggingface.co/tartuNLP/est-roberta-hist-ner)
+	* How to use the fine-tuned model for text annotation: [using\_bert\_ner\_tagger.ipynb](using_bert_ner_tagger.ipynb)   
 
 ### Error inspection
 
