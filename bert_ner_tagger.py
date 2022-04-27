@@ -5,6 +5,7 @@
 #     estnltk      v1.6.8+
 #     pytorch      v1.7.0+
 #     transformers v4.0.0+
+#     sentencepiece
 #
 
 import re

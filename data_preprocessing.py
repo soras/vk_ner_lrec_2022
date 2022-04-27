@@ -80,7 +80,7 @@ try:
     # EstNLTK 1.6.9(.1)
     from estnltk.taggers.text_segmentation.compound_token_tagger import ALL_1ST_LEVEL_PATTERNS
     from estnltk.taggers.text_segmentation.compound_token_tagger import CompoundTokenTagger
-except ImportError as err:
+except ModuleNotFoundError as err:
     # EstNLTK 1.7.0
     from estnltk.taggers.standard.text_segmentation.compound_token_tagger import ALL_1ST_LEVEL_PATTERNS
     from estnltk.taggers.standard.text_segmentation.compound_token_tagger import CompoundTokenTagger
@@ -89,7 +89,14 @@ except:
 
 def make_adapted_cp_tagger(**kwargs):
     '''Creates an adapted CompoundTokenTagger that exludes roman numerals from names with initials.'''
-    from estnltk.taggers.text_segmentation.patterns import MACROS
+    try:
+        # EstNLTK 1.6.9(.1)
+        from estnltk.taggers.text_segmentation.patterns import MACROS
+    except ModuleNotFoundError as err:
+        # EstNLTK 1.7.0
+        from estnltk.taggers.standard.text_segmentation.patterns import MACROS
+    except:
+        raise
     redefined_pat_1 = \
         { 'comment': '*) Names starting with 2 initials (exlude roman numerals I, V, X from initials);',
           'pattern_type': 'name_with_initial',
