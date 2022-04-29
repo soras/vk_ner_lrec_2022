@@ -1,11 +1,11 @@
 This repository contains data and source code of the experiments reported in LREC 2022 paper "Named Entity Recognition in Estonian 19th Century Parish Court Records".
 
-The goal is to experiment with automatic named entity recognition on historical Estonian texts -- on 19th century Estonian communal court minute books, which have been manually annotated for named entities.
+The goal is to experiment with automatic named entity recognition on historical Estonian texts -- on 19th century Estonian parish court records, which have been manually annotated for named entities.
 In the experiments, we (re)train a traditional machine learning NER approach as a baseline, and finetune different BERT-based transfer learning models for NER. 
 
 ## Dataset
 
-The folder [data](data) contains 19th century Estonian communal court minute books. 
+The folder [data](data) contains 19th century Estonian parish court records.  
 These materials originate the [crowdsourcing project](https://www.ra.ee/vallakohtud/) of The National Archives of Estonia,  and have been manually annotated with named entities in the project "Possibilities of automatic analysis of historical texts by the example of 19th-century Estonian communal court minutes".
 The project "Possibilities of automatic analysis of historical texts by the example of 19th-century Estonian communal court minutes" is funded by the national programme "Estonian Language and Culture in the Digital Age 2019-2027".
 

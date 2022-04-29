@@ -37,6 +37,7 @@
 #     estnltk 1.6.9(.1)
 #     transformers 4.0.0
 #     tokenizers
+#     sentencepiece
 #     datasets
 #     nervaluate
 #     seqeval

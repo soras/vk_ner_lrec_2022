@@ -4,23 +4,34 @@
 #   to conll NER annotations (in IOB2 format), split into 
 #   train/dev/test datasets.
 #
-#   For running this script, you first need to obtain the gold standard 
-#   NER annotation files from Kristjan Poska's experiments:
-#      https://github.com/pxska/bakalaureus/tree/main/data/vallakohtufailid-json-flattened 
-#   You should split these files into sub directories '1', '2', '3', '4', 
-#   '5', '6' according to the data split described here:
-#      https://github.com/pxska/bakalaureus/blob/main/data/divided_corpus.txt
-#      https://github.com/pxska/bakalaureus/blob/main/data/corpus_subdistribution_without_hand_tagged.txt
-#   This assures that the test set ('6') will remain the same as in 
-#   the previous experiments, and files in directories '1' to '5' 
-#   will be resplit into training and development sets.
+#   For running this script, you first need to the gold standard 
+#   NER annotation files from Kristjan Poska's experiments with 
+#   the cross-validation data split.
+#   How to get that data?
 #
-#   The script also outputs (tokenization and NER annotation) statistics 
+#   1) data/crossval_data_1to6.zip contains the packaged cross-
+#      validation files (as of 2021-12-28), just unpack the archive 
+#      into 'data';
+#
+#   2) if you want to restore the very original settings, then
+#      take files from:
+#          https://github.com/pxska/bakalaureus/tree/main/data/vallakohtufailid-json-flattened 
+#      split these files into sub directories '1', '2', '3', '4', '5', '6' 
+#      of 'data' according to the data split described here:
+#          https://github.com/pxska/bakalaureus/blob/main/data/divided_corpus.txt
+#          https://github.com/pxska/bakalaureus/blob/main/data/corpus_subdistribution_without_hand_tagged.txt
+#
+#   The goal is to assure that the test set ('6') remains the 
+#   same as in the cross-validation experiments, and files in directories 
+#   '1' to '5' will be resplit into training and development sets.
+#
+#   This script also outputs (tokenization and NER annotation) statistics 
 #   of the converted corpus. See the comment below for statistics of the 
 #   last run. 
 #
 #   If in_dir already contains non-empty directories 'train', 'dev' 
-#   and 'test', you do not need to run this script.
+#   and 'test', you do not need to run this script unless you want 
+#   to re-tokenize data.
 #   
 
 import os, os.path
