@@ -68,4 +68,18 @@ Results on the 'test' set:
 
 * [error_inspection](error_inspection) -- contains code for inspecting errors of the best model. The notebook `find_estroberta_ner_errors_on_test_corpus.ipynb` annotates 'test' set with the best model (finetuned `est-roberta`), and shows all the differences between gold standard annotations and automatically added annotations. Annotation differences are augmented with their textual contexts to ease the manual inspection. 
 
+## Citation
 
+In case you this dataset or any of the models in your work, please cite us as follows:
+	
+	@InProceedings{orasmaa-EtAl:2022:LREC,
+	  author    = {Orasmaa, Siim  and  Muischnek, Kadri  and  Poska, Kristjan  and  Edela, Anna},
+	  title     = {Named Entity Recognition in Estonian 19th Century Parish Court Records},
+	  booktitle      = {Proceedings of the Language Resources and Evaluation Conference},
+	  month          = {June},
+	  year           = {2022},
+	  address        = {Marseille, France},
+	  publisher      = {European Language Resources Association},
+	  pages     = {5304--5313},
+	  url       = {https://aclanthology.org/2022.lrec-1.568}
+	}
