@@ -70,7 +70,7 @@ Results on the 'test' set:
 
 ## Citation
 
-In case you this dataset or any of the models in your work, please cite us as follows:
+If you use this dataset or any of the models in your work, please cite us as follows:
 	
 	@InProceedings{orasmaa-EtAl:2022:LREC,
 	  author    = {Orasmaa, Siim  and  Muischnek, Kadri  and  Poska, Kristjan  and  Edela, Anna},
